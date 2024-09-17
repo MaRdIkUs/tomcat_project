@@ -1,0 +1,27 @@
+name: Configure SSH
+description: ""
+
+inputs:
+  SSH_KEY:
+    required: true
+  SSH_HOST:
+    required: true
+  SSH_USER:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Configure ssh"
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{ inputs.SSH_KEY }}" > ~/.ssh/prod.key
+        chmod 600 ~/.ssh/prod.key
+        cat >> ~/.ssh/config <<EOF
+        Host prod
+          User ${{ inputs.SSH_USER }}
+          HostName ${{ inputs.SSH_HOST }}
+          IdentityFile ~/.ssh/prod.key
+          StrictHostKeyChecking no
+        EOF
+      shell: bash
