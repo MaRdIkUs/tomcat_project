@@ -28,18 +28,8 @@ jobs:
       run: mvn package
 
     - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh/
-          echo "${SSH_KEY}" > ~/.ssh/prod.key
-          chmod 600 ~/.ssh/prod.key
-          cat >> ~/.ssh/config <<EOF
-          Host prod
-            User ${SSH_USER}
-            HostName ${SSH_HOST}
-            IdentityFile ~/.ssh/prod.key
-            StrictHostKeyChecking no
-          EOF
-        env:
-          SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
-          SSH_USER: ${{ secrets.PROD_SSH_USER }}
-          SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
+      uses: ./.github/actions/configure-ssh
+      with:
+        SSH_KEY:  ${{ secrets.SSH_KEY }}
+        SSH_USER:  ${{ secrets.SSH_USER }}
+        SSH_HOST:  ${{ secrets.SSH_HOST }}
