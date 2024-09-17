@@ -4,16 +4,15 @@
 name: Maven Package
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
     - name: Checkout code
@@ -28,7 +27,19 @@ jobs:
     - name: Build with Maven
       run: mvn package
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+    - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${SSH_KEY}" > ~/.ssh/prod.key
+          chmod 600 ~/.ssh/prod.key
+          cat >> ~/.ssh/config <<EOF
+          Host prod
+            User ${SSH_USER}
+            HostName ${SSH_HOST}
+            IdentityFile ~/.ssh/prod.key
+            StrictHostKeyChecking no
+          EOF
+        env:
+          SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+          SSH_USER: ${{ secrets.PROD_SSH_USER }}
+          SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
