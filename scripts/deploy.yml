@@ -15,5 +15,5 @@
       owner: root
       group: tomcat
       mode: u=rw,g=rwx,o=r
-    ansible.builtin.command: tar -xf /var/lib/tomcat10/webapps/ROOT/ROOT.tar
+  - ansible.builtin.command: tar -xf /var/lib/tomcat10/webapps/ROOT/ROOT.tar
       
