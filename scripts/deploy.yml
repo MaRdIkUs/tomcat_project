@@ -1,0 +1,16 @@
+- name: Deploy project
+  hosts: all
+
+  become: yes
+  - name: Remove old build
+    ansible.builtin.file:
+      path: /var/lib/tomcat10/webapps/ROOT
+      state: absent
+
+  - name: Deploy new build
+    ansible.builtin.copy:
+    src: /ROOT
+    dest: /var/lib/tomcat10/webapps/ROOT
+    owner: root
+    group: tomcat
+    mode: u=rw,g=rwx,o=r
