@@ -5,16 +5,14 @@
   tasks:
   - name: Remove old build
     ansible.builtin.file:
-      path: /var/lib/tomcat10/webapps/ROOT/*
+      path: /var/lib/tomcat10/webapps/ROOT
       state: absent
 
   - name: Deploy new build
-    ansible.builtin.copy:
+    ansible.builtin.unarchive::
       src: ROOT.tar
-      dest: /var/lib/tomcat10/webapps/ROOT
-      owner: root
+      dest: /var/lib/tomcat10/webapps/
+      owner: tomcat
       group: tomcat
-      mode: u=rw,g=rwx,o=r
-  - name: Extract files    
-    ansible.builtin.command: sudo tar -xf /var/lib/tomcat10/webapps/ROOT/ROOT.tar
+      mode: u=rwx,g=rwx,o=r
       
