@@ -41,6 +41,9 @@ jobs:
 
     - name: Move Ansible playbook
       run: sudo cp ./scripts/deploy.yml deploy.yml
+
+    - name: Archive project
+      run: tar -zcvf ROOT.tar ROOT
     
     - name: Deploy project
       uses: dawidd6/action-ansible-playbook@v2
@@ -53,4 +56,3 @@ jobs:
           prod
         options: |
           --inventory .hosts
-          -vvv
