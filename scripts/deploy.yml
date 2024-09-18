@@ -14,5 +14,5 @@
       dest: /var/lib/tomcat10/webapps/
       owner: tomcat
       group: tomcat
-      mode: u=rwx,g=rwx,o=r
+      mode: u=rwx,g=rwx,o=rx
       
