@@ -9,7 +9,7 @@
       state: absent
 
   - name: Deploy new build
-    ansible.builtin.unarchive::
+    ansible.builtin.unarchive:
       src: ROOT.tar
       dest: /var/lib/tomcat10/webapps/
       owner: tomcat
