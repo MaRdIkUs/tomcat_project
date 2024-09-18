@@ -32,7 +32,10 @@ jobs:
         SSH_KEY:  ${{ secrets.SSH_KEY }}
         SSH_USER:  ${{ secrets.SSH_USER }}
         SSH_HOST:  ${{ secrets.SSH_HOST }}
-        
+
+    - name: Change script premissions
+      run: sudo chmod ugo+x ./scripts/move-file.sh
+    
     - name: Move build folder
       run: sudo ./scripts/move-file.sh target/ ROOT
 
