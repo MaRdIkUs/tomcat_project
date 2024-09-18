@@ -33,3 +33,18 @@ jobs:
         SSH_KEY:  ${{ secrets.SSH_KEY }}
         SSH_USER:  ${{ secrets.SSH_USER }}
         SSH_HOST:  ${{ secrets.SSH_HOST }}
+        
+    - name: Move build folder
+      run: "sudo ./scripts/move-file target/ ROOT"
+
+    - name: Deploy project
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: deploy.yml
+        directory: ./scripts/
+        key: ${{secrets.SSH_KEY}}
+        inventory: |
+          [all]
+          prod
+        options: |
+          --inventory .hosts
