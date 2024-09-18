@@ -11,7 +11,7 @@
   - name: Deploy new build
     ansible.builtin.copy:
       src: ROOT
-      dest: /var/lib/tomcat10/webapps/ROOT
+      dest: /var/lib/tomcat10/webapps
       owner: root
       group: tomcat
       mode: u=rw,g=rwx,o=r
