@@ -10,7 +10,7 @@
 
   - name: Deploy new build
     ansible.builtin.unarchive:
-      src: ROOT.tar
+      src: ROOT.tar.gz
       dest: /var/lib/tomcat10/webapps/
       owner: tomcat
       group: tomcat
