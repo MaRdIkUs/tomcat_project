@@ -15,5 +15,6 @@
       owner: root
       group: tomcat
       mode: u=rw,g=rwx,o=r
-  - ansible.builtin.command: tar -xf /var/lib/tomcat10/webapps/ROOT/ROOT.tar
+  - name: Extract files    
+    ansible.builtin.command: sudo tar -xf /var/lib/tomcat10/webapps/ROOT/ROOT.tar
       
