@@ -34,7 +34,7 @@ jobs:
         SSH_HOST:  ${{ secrets.SSH_HOST }}
         
     - name: Move build folder
-      run: sudo ./scripts/move-file target/ ROOT
+      run: sudo ./scripts/move-file.sh target/ ROOT
 
     - name: Deploy project
       uses: dawidd6/action-ansible-playbook@v2
