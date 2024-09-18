@@ -39,11 +39,14 @@ jobs:
     - name: Move build folder
       run: sudo ./scripts/move-file.sh target/ ROOT
 
+    - name: Move Ansible playbook
+      run: sudo cp /scripts/deploy.yml deploy.yml
+    
     - name: Deploy project
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: deploy.yml
-        directory: ./scripts/
+        directory: .
         key: ${{secrets.SSH_KEY}}
         inventory: |
           [all]
