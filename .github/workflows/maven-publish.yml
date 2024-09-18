@@ -40,7 +40,7 @@ jobs:
       run: sudo ./scripts/move-file.sh target/ ROOT
 
     - name: Move Ansible playbook
-      run: sudo cp /scripts/deploy.yml deploy.yml
+      run: sudo cp ./scripts/deploy.yml deploy.yml
     
     - name: Deploy project
       uses: dawidd6/action-ansible-playbook@v2
